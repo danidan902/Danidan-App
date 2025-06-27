@@ -4,9 +4,15 @@ import { db } from "./config/db.js";
 import { favoritesTable } from "./db/schema.js";
 import { json } from "drizzle-orm/gel-core";
 import { and, eq } from "drizzle-orm";
+import Job from "./config/corn.js";
+
 
 const app = express();
 const PORT = ENV.PORT || 5001;
+
+ if(ENV.NODE_ENV === "production") Job.start();
+
+ 
 app.use(express.json());
 app.get("/api/health", (req, res) => {
   res.status(200).json({ success: true });
